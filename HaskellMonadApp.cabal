@@ -59,3 +59,15 @@ executable ReaderT
   default-language:    Haskell2010
   ghc-options:         -main-is ReaderT
   -- exposed-modules:     Data.AST
+
+executable Maybe
+  main-is:             Maybe.hs
+  other-modules:       Data.AST
+  -- other-extensions:
+  build-depends:       base >=4.14 && <4.15
+                    ,  mtl
+                    ,  HaskellMonadApp
+  hs-source-dirs:      src
+                       Programs
+  default-language:    Haskell2010
+  ghc-options:         -main-is Maybe
