@@ -1,5 +1,10 @@
 {-# LANGUAGE RecordWildCards #-}
-module Maybe where
+
+module Maybe ( WeatherConditions(..)
+             , wc
+             , main
+             )
+where
 import Data.AST
 
 data WeatherConditions =
