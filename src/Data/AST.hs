@@ -15,3 +15,4 @@ data WeatherStatus =
     |   Rain
     |   Snow
     deriving (Eq, Ord, Show)
+

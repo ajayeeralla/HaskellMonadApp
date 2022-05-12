@@ -1,18 +1,18 @@
 module Reader
     ( WeatherConditions(..)
     , main
+    , wc
     )
 where
 import Control.Monad.Reader
 import Data.AST
 
-
 data WeatherConditions =
-        WeatherConditions
-        { temperature :: Int
-        , temperatureScale :: TemperatureScale
-        , weatherStatus :: WeatherStatus
-        }
+    WeatherConditions
+    { temperature :: Int
+    , temperatureScale :: TemperatureScale
+    , weatherStatus :: WeatherStatus
+    }
 
 weatherConditionString :: Reader WeatherConditions String
 weatherConditionString = do

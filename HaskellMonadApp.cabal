@@ -46,3 +46,16 @@ executable Reader
   ghc-options:         -main-is Reader
   -- exposed-modules:     Data.AST
 
+executable ReaderT
+  main-is:             ReaderT.hs
+  other-modules:       Data.AST
+                       Reader
+  -- other-extensions:
+  build-depends:       base >=4.14 && <4.15
+                    ,  mtl
+                    ,  HaskellMonadApp
+  hs-source-dirs:      src
+                       Programs
+  default-language:    Haskell2010
+  ghc-options:         -main-is ReaderT
+  -- exposed-modules:     Data.AST
