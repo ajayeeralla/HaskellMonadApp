@@ -87,13 +87,16 @@ executable MaybeT
 
 executable State
   main-is:             State.hs
-  -- other-modules:       Maybe
-  --                      Data.AST
-  -- other-extensions:
   build-depends:       base >=4.14 && <4.15
                     ,  mtl
-                    ,  HaskellMonadApp
-  hs-source-dirs:      src
-                       Programs
+  hs-source-dirs:      Programs
   default-language:    Haskell2010
   ghc-options:         -main-is State
+
+executable Either
+  main-is:             Either.hs
+  build-depends:       base >=4.14 && <4.15
+                    ,  mtl
+  hs-source-dirs:      Programs
+  default-language:    Haskell2010
+  ghc-options:         -main-is Either
