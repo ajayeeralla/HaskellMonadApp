@@ -5,7 +5,13 @@ module Reader
     )
 where
 import Control.Monad.Reader
-import Data.AST
+  ( MonadReader(ask)
+  , runReader, Reader
+  )
+import Data.Types
+  ( WeatherStatus(Clouds)
+  , TemperatureScale(Fahrenheit)
+  )
 
 data WeatherConditions =
     WeatherConditions
@@ -22,13 +28,15 @@ weatherConditionString = do
                             status = weatherStatus weather
                         return $ "The current weather conditions are "++ show status++ ", " ++ show temp ++ " degrees " ++ show scale
 
-wc = WeatherConditions
-        { temperature = 53
-        , temperatureScale = Fahrenheit
-        , weatherStatus = Clouds
-        }
+wc :: WeatherConditions
+wc =
+    WeatherConditions
+    { temperature = 53
+    , temperatureScale = Fahrenheit
+    , weatherStatus = Clouds
+    }
 
 main :: IO ()
 main =  do
-        let str = runReader weatherConditionString wc
-        putStrLn str
+    let str = runReader weatherConditionString wc
+    putStrLn str

@@ -4,10 +4,12 @@ import Control.Monad.Fail
 import Data.Either
 import Text.Read (readMaybe)
 import System.Environment (getArgs)
-import Data.Maybe ( fromMaybe )
+import Data.Maybe( fromMaybe )
+import Control.Monad (when)
 
 failIfOdd :: Int -> Either Int ()
-failIfOdd n = if n `mod` 2 == 0 then Right () else Left n
+failIfOdd n =
+        when (odd n) $ Left n
 
 failIfAnyOdd :: [Int] -> Either Int ()
 failIfAnyOdd = mapM_ failIfOdd
