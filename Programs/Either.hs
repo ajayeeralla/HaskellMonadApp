@@ -3,7 +3,7 @@ module Either where
 import Data.Either ()
 import Text.Read (readMaybe)
 import System.Environment (getArgs)
-import Data.Maybe( fromMaybe )
+import Data.Maybe (fromMaybe)
 import Control.Monad (when)
 
 failIfOdd :: Int -> Either Int ()
