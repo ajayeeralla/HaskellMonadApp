@@ -9,20 +9,16 @@ where
 import Control.Monad.State.Lazy
   ( State
   , execState
-  )
-import Control.Monad.State.Class
-  ( MonadState(get, put)
+  , modify
   )
 import GHC.Generics (Generic)
 import Data.Aeson ( FromJSON, ToJSON )
-
-
 
 data Color =
     Red
     | Green
     | Blue
-    deriving(Show)
+    deriving(Show, Generic)
 
 data ColorCounts =
     ColorCounts
@@ -30,37 +26,20 @@ data ColorCounts =
     , greenCount :: Int
     , blueCount :: Int
     }
-    deriving (Generic, Show)
+    deriving (Show)
 
-instance FromJSON ColorCounts
-instance ToJSON ColorCounts
+instance FromJSON Color
+instance ToJSON Color
 
-incRed :: ColorCounts -> ColorCounts
-incRed cc =
-    let x = redCount cc in
-    cc {redCount=x+1}
-
-incGreen :: ColorCounts -> ColorCounts
-incGreen cc =
-    let x = greenCount cc in
-    cc {greenCount=x+1}
-
-incBlue :: ColorCounts -> ColorCounts
-incBlue cc =
-    let x = blueCount cc in
-    cc {blueCount=x+1}
-
-count :: [Color] -> State ColorCounts ()
-count [] = do
-    _ <- get
-    return ()
-count (c:cs) = do
-    cc <- get
+countColor :: Color -> State ColorCounts ()
+countColor c =
     case c of
-        Red -> put $ incRed cc
-        Green -> put $ incGreen cc
-        Blue -> put $ incBlue cc
-    count cs
+        Red -> modify (\s ->  s { redCount = redCount s + 1 })
+        Green -> modify (\s -> s { greenCount = greenCount s + 1 })
+        Blue -> modify (\s -> s { blueCount = blueCount s + 1 })
+
+countColors :: [Color] -> State ColorCounts ()
+countColors = mapM_ countColor
 
 defaultColorCounts :: ColorCounts
 defaultColorCounts =
@@ -73,8 +52,8 @@ defaultColorCounts =
 listColors :: [Color]
 listColors = [Red, Green, Blue, Red, Blue]
 
-main :: IO()
+main :: IO ()
 main = do
-    let state = count listColors
-    let s = execState state defaultColorCounts
+    let state = countColors listColors
+        s = execState state defaultColorCounts
     print $ "redcount = " ++ show (redCount s) ++ ", greenCount = " ++ show (greenCount s) ++ ", blueCount = " ++ show (blueCount s)
