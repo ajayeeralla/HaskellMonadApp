@@ -1,4 +1,11 @@
-module State where
+{-# LANGUAGE DeriveGeneric #-}
+module State
+  ( Color
+  , ColorCounts
+  , main
+  , defaultColorCounts
+  )
+where
 import Control.Monad.State.Lazy
   ( State
   , execState
@@ -6,6 +13,10 @@ import Control.Monad.State.Lazy
 import Control.Monad.State.Class
   ( MonadState(get, put)
   )
+import GHC.Generics (Generic)
+import Data.Aeson ( FromJSON, ToJSON )
+
+
 
 data Color =
     Red
@@ -19,6 +30,10 @@ data ColorCounts =
     , greenCount :: Int
     , blueCount :: Int
     }
+    deriving (Generic, Show)
+
+instance FromJSON ColorCounts
+instance ToJSON ColorCounts
 
 incRed :: ColorCounts -> ColorCounts
 incRed cc =

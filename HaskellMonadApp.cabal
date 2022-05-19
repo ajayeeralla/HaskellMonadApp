@@ -73,9 +73,22 @@ executable State
   main-is:             State.hs
   build-depends:       base >=4.14 && <4.15
                     ,  mtl
+                    ,  aeson
   hs-source-dirs:      Programs
   default-language:    Haskell2010
   ghc-options:         -Wall -main-is State
+
+executable StateT
+  main-is:             StateT.hs
+  other-modules:       State
+  build-depends:       base >=4.14 && <4.15
+                    ,  mtl
+                    ,  aeson
+                    ,  filepath
+                    ,  bytestring
+  hs-source-dirs:      Programs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -main-is StateT
 
 executable Either
   main-is:             Either.hs
