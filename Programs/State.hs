@@ -1,9 +1,11 @@
 {-# LANGUAGE DeriveGeneric #-}
 module State
-  ( Color
-  , ColorCounts
+  ( Color(..)
+  , ColorCounts(..)
   , main
   , defaultColorCounts
+  , countColors
+  , listColors
   )
 where
 import Control.Monad.State.Lazy
