@@ -97,3 +97,17 @@ executable Either
   hs-source-dirs:      Programs
   default-language:    Haskell2010
   ghc-options:         -Wall -main-is Either
+
+executable ExceptT
+  main-is:             ExceptT.hs
+  other-modules:       State
+  build-depends:       base >=4.14 && <4.15
+                    ,  mtl
+                    ,  aeson
+                    ,  filepath
+                    ,  bytestring
+                    ,  transformers
+                    ,  errors
+  hs-source-dirs:      Programs
+  default-language:    Haskell2010
+  ghc-options:         -Wall -main-is ExceptT
